@@ -16,26 +16,37 @@ public class Store implements IJustHaveALook, IFastLane, ILane {
 
     @Override
     public void oneShotOrder() {
+        System.out.println("One shot order...");
+        addItemToCart();
+        pay();
 
+        System.out.println("Checking stock...");
+        isAvailable();
+        System.out.println("Ordering...");
+        provider.getPrice();
+        provider.order();
     }
 
     @Override
     public int getPrice() {
+        System.out.println("Price : 5€");
         return 0;
     }
 
     @Override
     public boolean isAvailable() {
-        return false;
+        System.out.println("Product available");
+        return true;
     }
 
     @Override
     public void addItemToCart() {
-
+        System.out.println("Add article to cart");
     }
 
     @Override
     public void pay() {
-
+        System.out.println("Paying...");
+        bank.transfert();
     }
 }

@@ -19,6 +19,9 @@ public class Client implements IRun {
 
     @Override
     public void run() {
-
+        System.out.println("Check article...");
+        justHaveALook.getPrice();
+        justHaveALook.isAvailable();
+        fastLane.oneShotOrder();
     }
 }
