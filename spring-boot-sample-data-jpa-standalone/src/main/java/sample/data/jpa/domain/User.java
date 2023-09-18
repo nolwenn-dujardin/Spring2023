@@ -1,14 +1,19 @@
 package sample.data.jpa.domain;
 // Imports ...
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.validation.constraints.NotNull;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "users")
 public class User {
 
@@ -18,49 +23,16 @@ public class User {
   private long id;
   
   @NotNull
+  @Column(name = "email")
   private String email;
   
   @NotNull
+  @Column(name = "name")
   private String name;
 
-  // Public methods
-  
-  public User() { }
+    public User(String email, String name) {
+    }
 
-  public User(long id) { 
-    this.id = id;
-  }
-  
-  public User(String email, String name) {
-    this.email = email;
-    this.name = name;
-  }
-
-public long getId() {
-	return id;
-}
-
-public void setId(long id) {
-	this.id = id;
-}
-
-public String getEmail() {
-	return email;
-}
-
-public void setEmail(String email) {
-	this.email = email;
-}
-
-public String getName() {
-	return name;
-}
-
-public void setName(String name) {
-	this.name = name;
-}
-
-  // Getter and setter methods
-  // ...
-
+    public User(long id) {
+    }
 }
