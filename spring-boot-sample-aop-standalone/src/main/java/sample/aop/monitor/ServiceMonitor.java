@@ -20,6 +20,7 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 
+import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
 
 @Aspect
@@ -31,4 +32,9 @@ public class ServiceMonitor {
 		System.out.println("Completed: " + joinPoint);
 	}
 
+	//@Before("execution(* sample.aop.part1.*.*(..))")
+	@Before("execution(* sample.aop.part1.*.*.*(..))")
+	public void logMethodCall(JoinPoint joinPoint) {
+		System.out.println("[X] Appel d'une méthode");
+	}
 }
