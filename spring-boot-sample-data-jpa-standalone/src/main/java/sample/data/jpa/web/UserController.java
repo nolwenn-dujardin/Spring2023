@@ -2,10 +2,7 @@ package sample.data.jpa.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import sample.data.jpa.domain.User;
 import sample.data.jpa.service.UserDao;
@@ -14,14 +11,13 @@ import sample.data.jpa.service.UserDao;
 public class UserController {
 
   /**
-   * GET /create  --> Create a new user and save it in the database.
+   * POST /create  --> Create a new user and save it in the database.
    */
   @RequestMapping(value = "/create", method = RequestMethod.POST)
   @ResponseBody
-  public String create(String email, String name) {
+  public String create(@RequestBody User user) {
     String userId = "";
     try {
-      User user = new User(email, name);
       userDao.save(user);
       userId = String.valueOf(user.getId());
     }
@@ -32,14 +28,14 @@ public class UserController {
   }
   
   /**
-   * GET /delete  --> Delete the user having the passed id.
+   * DELETE /delete  --> Delete the user having the passed id.
    */
-  @RequestMapping("/delete")
+  @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
   @ResponseBody
-  public String delete(long id) {
+  public String delete(@RequestParam long id) {
+    System.out.println("DELETE USER WITH ID : "+id);
     try {
-      User user = new User(id);
-      userDao.delete(user);
+      userDao.deleteById(id);
     }
     catch (Exception ex) {
       return "Error deleting the user:" + ex.toString();
@@ -51,7 +47,7 @@ public class UserController {
    * GET /get-by-email  --> Return the id for the user having the passed
    * email.
    */
-  @RequestMapping("/get-by-email/{email}")
+  @RequestMapping(value = "/get-by-email/{email}", method = RequestMethod.GET)
   @ResponseBody
   public String getByEmail(@PathVariable("email") String email) {
     String userId = "";
@@ -66,12 +62,12 @@ public class UserController {
   }
   
   /**
-   * GET /update  --> Update the email and the name for the user in the 
+   * PUT /update  --> Update the email and the name for the user in the
    * database having the passed id.
    */
-  @RequestMapping("/update")
+  @RequestMapping(value = "/update", method = RequestMethod.PUT)
   @ResponseBody
-  public String updateUser(long id, String email, String name) {
+  public String updateUser(@RequestParam long id, @RequestParam String email, @RequestParam String name) {
     try {
       User user = userDao.findById(id).get();
       user.setEmail(email);
