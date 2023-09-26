@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import sample.data.jpa.domain.User;
@@ -15,7 +16,7 @@ public class UserController {
   /**
    * GET /create  --> Create a new user and save it in the database.
    */
-  @RequestMapping("/create")
+  @RequestMapping(value = "/create", method = RequestMethod.POST)
   @ResponseBody
   public String create(String email, String name) {
     String userId = "";
