@@ -50,14 +50,18 @@ public class RDVController {
     @RequestMapping(value = "/update-rdv/{RdvId}", method = RequestMethod.PUT)
     @ResponseBody
     public String update(@RequestBody RDV rdv, @PathVariable("RdvId") Long rdvId) {
-        String userId = "";
         try {
             RDV r = rdvdao.getReferenceById(rdvId);
-            r.setName(rdv.getName());
-            r.setClient(rdv.getClient());
-            r.setProfessional(rdv.getProfessional());
+            if (rdv.getClient() != null) {
+                r.setClient(rdv.getClient());
+            }
+            if (rdv.getProfessional() != null) {
+                r.setProfessional(rdv.getProfessional());
+            }
+            if (rdv.getStart_time() != null) {
+                r.setStart_time(rdv.getStart_time());
+            }
             r.setReserved(rdv.isReserved());
-            r.setStart_time(rdv.getStart_time());
             rdvdao.save(r);
         }
         catch (Exception ex) {
