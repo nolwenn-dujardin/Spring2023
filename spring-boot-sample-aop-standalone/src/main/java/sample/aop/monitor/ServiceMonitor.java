@@ -17,7 +17,9 @@
 package sample.aop.monitor;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 
 import org.aspectj.lang.annotation.Before;
@@ -36,6 +38,16 @@ public class ServiceMonitor {
 	@Before("execution(* sample.aop.part1.*.*.*(..))")
 	public void logMethodCall(JoinPoint joinPoint) {
 		System.out.println("[X] Appel de la méthode " + joinPoint.getSignature().getName() + " à partir de la classe : " + joinPoint.getSignature().getDeclaringType().getName());
+	}
+
+	@Around("execution(* sample.aop.part1.bank.Bank.transfert())")
+	public Object interceptCall(ProceedingJoinPoint joinPoint) throws Throwable {
+		int rNumber = (int) (Math.random() * 5);
+		if (rNumber < 2) {
+			return rNumber;
+		} else {
+			return joinPoint.proceed();
+		}
 	}
 
 }
