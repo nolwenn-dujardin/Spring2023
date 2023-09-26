@@ -4,13 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import sample.data.jpa.domain.RDV;
-import sample.data.jpa.domain.User;
 import sample.data.jpa.service.RDVDAO;
 
 @Controller
 public class RDVController {
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    @RequestMapping(value = "/create-rdv", method = RequestMethod.POST)
     @ResponseBody
     public String create(@RequestBody RDV rdv) {
         String userId = "";
@@ -36,7 +35,7 @@ public class RDVController {
         }
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/delete-rdv", method = RequestMethod.DELETE)
     @ResponseBody
     public String create(@RequestBody Long id) {
         try {
@@ -48,7 +47,7 @@ public class RDVController {
         return "RDV succesfully deleted";
     }
 
-    @RequestMapping(value = "/update/{RdvId}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/update-rdv/{RdvId}", method = RequestMethod.PUT)
     @ResponseBody
     public String update(@RequestBody RDV rdv, @PathVariable("RdvId") Long rdvId) {
         String userId = "";
