@@ -35,6 +35,7 @@ public class ServiceMonitor {
 	//@Before("execution(* sample.aop.part1.*.*(..))")
 	@Before("execution(* sample.aop.part1.*.*.*(..))")
 	public void logMethodCall(JoinPoint joinPoint) {
-		System.out.println("[X] Appel d'une méthode");
+		System.out.println("[X] Appel de la méthode " + joinPoint.getSignature().getName() + " à partir de la classe : " + joinPoint.getSignature().getDeclaringType().getName());
 	}
+
 }
