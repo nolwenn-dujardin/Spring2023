@@ -51,3 +51,5 @@ RDVController :
 * GET : /rdv/   (/rdv/1)
 * DELETE : /delete-rdv (/delete-rdv?id=3)
 * PUT : /update-rdv/ (/update-rdv/1)
+
+Pour les requêtes POST et PUT, nous avons décidé d'utiliser des RequestBody en JSON pour passer certains ou tous les paramètres.
