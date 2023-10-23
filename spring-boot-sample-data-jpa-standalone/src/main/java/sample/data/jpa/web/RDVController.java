@@ -37,7 +37,7 @@ public class RDVController {
 
     @RequestMapping(value = "/delete-rdv", method = RequestMethod.DELETE)
     @ResponseBody
-    public String create(@RequestBody Long id) {
+    public String create(@RequestParam Long id) {
         try {
             rdvdao.deleteById(id);
         }
